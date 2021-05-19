@@ -1,0 +1,64 @@
+Marko Andreis 21.10.2020. "Dodana struktura za početak rada na dokumentaciji"
+
+Mario Bašić 24.10.2020. "Započet rad na opisu projekta"
+
+Marko Andreis 27.10.2020. "Dovršen opis projektnog zadatka"
+
+Borna Majstorovic 28.10.2020. "Dodani funkcionalni i nefunkcionalni zahtjevi"
+
+Marko Andreis 29.10.2020. "Dodan prvi dio opisa obrazaca uporabe"
+
+Mario Bašić 30.10.2020. "Dodani svi opisi obrazaca uporabe"
+
+Toni Krešo 1.11.2020. "Prepravljen prvi dio obrazaca uporabe"
+
+Pero Pasković 1.11.2020. "Prepravljen prvi dio obrazaca uporabe"
+
+Borna Majstorovič 1.11.2020. "Prepravljen drugi dio obrazaca uporabe"
+
+Stjepan Andričević 4.11.2020. "Ispravak obrazaca uporabe"
+
+Marko Andreis 4.11.2020. "Ispravak obrazaca uporabe"
+
+Toni Matić 5.11.2020. "Dodan Use Case dijagram, dovršeni funkcionalni i nefunkcionalni zahtjevi"
+
+Pero Pasković 5.11.2020. "Dodan Use Case dijagram, dovršeni funkcionalni i nefunkcionalni zahtjevi"
+
+Stjepan Andričević 6.11.2020. "Izmjena dijagrama obrazaca uporabe"
+
+Toni Krešo 6.11.2020. "Dodan novi obrazac uporabe, izmjena dijagrama"
+
+Mario Bašić 6.11.2020. "Dodan novi obrazac uporabe, izmjena dijagrama"
+
+Marko Andreis 7.11.2020. "Dodani sekvencijski dijagrami"
+
+Toni Matić 7.11.2020. "Dodani sekvencijski dijagrami"
+
+Pero Pasković 7.11.2020. "Popravljeni sekvencijski dijagrami i dijagrami obrazaca uporabe"
+
+Mario Bašić 8.11.2020. "Arhitektura i dizajn sustava"
+
+Toni Matić 8.11.2020. "Arhitektura i dizajn sustava"
+
+Marko Andreis 8.11.2020. "Arhitektura i dizajn sustava"
+
+Toni Krešo 9.11.2020. "Zaključak i budući rad, dodatak A, B i C"
+
+Pero Pasković 9.11.2020. "Zaključak i budući rad, dodatak A, B i C"
+
+Borna Majstorović 9.11.2020. "Dijagram objekata"
+
+Stjepan Andričević 10.11.2020. "Pojmovnik"
+
+Mario Bašić 11.11.2020. "Popravljena baza podataka"
+
+Toni Krešo 11.11.2020. "Popravljena baza podataka"
+
+Toni Matić 11.11.2020. "Dijagram razreda i dijagram objekata"
+
+Pero Pasković 11.11.2020. "Dijagram razreda i dijagram objekata"
+
+Stjepan Andričević 12.11.2020. "Opisi razreda i dodatak D"
+
+Marko Andreis 13.11.2020. "Korigiranje teksta i provjera dokumentacije"
+

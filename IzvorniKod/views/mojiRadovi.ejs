@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= title %></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="fonts/fonts.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="fontawesome2/css/all.min.css" rel="stylesheet" /> <!-- https://fontawesome.com/ -->
+  <style>
+    html,body,h1,h2,h3,h4,h5,p {font-family: "Raleway", sans-serif}
+    label, .submit { display: inline-block;
+      width: 140px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body class="light-grey">
+
+<!-- Top container -->
+<div class="bar top black large" style="z-index:4">
+  <button class="bar-item button hide-large hover-none hover-text-light-grey" onclick="open_sidebar();"><i class="fa fa-bars"></i>  Menu</button>
+  <span class="bar-item right"><i class="fas fa-globe"></i>&nbsp Sci-Con</span>
+</div>
+
+<!-- Sidebar/menu -->
+<nav class="sidebar collapse white animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+  <div class="container row">
+    <div class="col s4">
+      <img src="images/male.jpg" class="circle margin-right" style="width:46px">
+    </div>
+    <div class="col s8 bar">
+      <span>Dobrodošli, <strong><%=user.ime%></strong></span><br>
+
+      <% if (user.organizator ) { %>
+      <a href="/slanje-obavijesti" class="bar-item button"><i class="fa fa-envelope"></i></a>
+      <% } %>  
+
+      <a href="/profil" class="bar-item button"><i class="fa fa-user"></i></a>
+      <a href="/postavke" class="bar-item button"><i class="fa fa-cog"></i></a>
+      <a href="/odjava" class="bar-item button"><i class="fa fa-sign-out-alt"></i></a>
+    </div>
+  </div>
+  <hr>
+
+  <div class="container">
+    <h5>Radna površina</h5>
+  </div>
+  <div class="bar-block">
+    <a href="#" class="bar-item button padding-16 hide-large dark-grey hover-black" onclick="close_sidebar()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
+    <a href="/profil" class="bar-item button padding"><i class="fas fa-user fa-fw"></i>  Profil</a>
+    <a href="/popis-konferencija" class="bar-item button padding"><i class="fa fa-list fa-fw"></i>  Popis konferencija</a>
+    <a href="/ucitavanje-rada" class="bar-item button padding"><i class="fa fa-edit fa-fw"></i>  Učitavanje rada</a>
+    <a href="/moji-radovi" class="bar-item button padding blue"><i class="fa fa-history fa-fw"></i>  Moji radovi</a>
+    
+    <% if(user.recenzent) { %>
+      <a href="/recenzija-rada" class="bar-item button padding"><i class="fas fa-eye fa-fw"></i>  Recenzija rada</a>
+    <% } %>
+
+    <% if(user.organizator) { %>
+      <a href="/prijave-za-recenziranje" class="bar-item button padding"><i class="fa fa-bell fa-fw"></i>  Prijave za recenziranje</a>
+      <a href="/slanje-obavijesti" class="bar-item button padding"><i class="fas fa-envelope fa-fw"></i>  Slanje obavijesti</a>
+      <a href="/pregled-radova" class="bar-item button padding"><i class="fas fa-book fa-fw"></i>  Pregled radova</a>
+    <% } %>
+    
+    <% if(user.administrator) { %>
+      <a href="/stvori-konferenciju" class="bar-item button padding"><i class="far fa-plus-square fa-fw"></i>  Stvori konferenciju</a>
+      <a href="/statistika" class="bar-item button padding"><i class="fa fa-chart-bar fa-fw"></i>  Statistika</a>
+    <% } %>
+    
+    <a href="/postavke" class="bar-item button padding"><i class="fa fa-cog fa-fw"></i>  Postavke</a>
+    <a href="/odjava" class="bar-item button padding"><i class="fa fa-sign-out-alt fa-fw"></i>  Odjava</a><br><br>
+  </div>
+</nav>
+
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="overlay hide-large animate-opacity" onclick="close_sidebar()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="main1">
+
+    <% if (trenutniKorisnikRad.length == 0) { %>
+      <h1>Trenutno nemate pohranjenih radova.</h1>
+    <% } else { %>
+      <% var n = 1 %>
+
+      <h1>Moji znanstveni radovi:</h1>
+
+        <% trenutniKorisnikRad.forEach(tkr => { %>
+        <% var infoModal = "infoModal" + n %>
+        <% var updateModal = "updateModal" + n %> 
+        <% var close = "close" + n %>
+        
+    
+
+    
+
+    <div style="border: 1px solid yellowgreen; padding:15px; margin-right: 40%;">
+        <h3><%= tkr.naslov %></h3>
+        <% let autori = "" %>
+        <% korisnikRad.forEach(kr => { %>
+          <% if(kr.id_rada == tkr.id_rada) { %>
+              <% autori = autori + kr.ime + " " + kr.prezime + ", " %>
+          <% } %>
+        <% }) %>
+        <% autori = autori.slice(0, -1) %>
+        <% autori = autori.slice(0, -1) %>
+        <p>Autor(i): <%= autori %></p>
+
+        <!--Info-->
+        <button class="blue" id="infoBtn" onclick="info(<%=n%>);">Informacije</button>
+        <div id="<%=infoModal%>" class="modal">
+          <div class="modal-content">
+            <div class="modal-header">
+              <span id="<%=close%>" class="close" onclick="closeInfo(<%=n%>);">&times;</span>
+              <h2><%= tkr.naslov %></h2>
+            </div>
+            <div class="modal-body">
+              <% radSekcijaKonferencija.forEach(rsk => { %>
+                <% if(rsk.id_rada == tkr.id_rada) { %>
+                  <p>Konferencija: <%= rsk.naziv %></p>
+                  <p>Sekcija: <%= rsk.naziv_sekcije %> </p>
+                  <p>Organizator: <%= rsk.ime +" "+ rsk.prezime %> </p>
+                <% } %>
+              <% }) %>
+            </div>
+          </div>
+        </div>
+
+        <!--Dohvati učitani rad-->
+        <button class="green" id="dohvatiBtn"> <a style="text-decoration: none;" href="/moji-radovi/<%=tkr.id_rada%>">Dohvati učitani rad</a></button>
+        
+
+        <!--Pohrani uređeni rad-->
+        <button class="red" id="pohraniBtn" onclick="update(<%=n%>)";>Pohrani uređeni rad</button>
+        <div id="<%=updateModal%>" class="modal">
+          <div class="modal-content">
+            <div class="modal-header">
+              <span id="<%=close%>" class="close" onclick="closeUpdate(<%=n%>);">&times;</span>
+              <h2><%= tkr.naslov %></h2>
+            </div>
+            <div class="modal-body">
+              <form class="padding" action="ucitavanje-rada/izmjena/<%=tkr.id_rada%>" method="POST" enctype="multipart/form-data">
+               <input type="file" name="pic" id="file" style="margin-left: 125px;"><br><br>
+              
+                <input class="submit blue" type="submit" value="Predaj rad" onClick="return jelpdf();">
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <p style="color:crimson">Ocjena: <%= tkr.ocjena %></p>
+        <p style="color:crimson">Komentar: <%= tkr.komentar %></p>
+        
+    </div>
+
+          <% n = n + 1 %>
+          <br>
+         <% }) %>
+
+
+    <% } %>
+
+</div>
+
+<script>
+// Get the Sidebar
+var mySidebar = document.getElementById("mySidebar");
+
+// Get the DIV with overlay effect
+var overlayBg = document.getElementById("myOverlay");
+
+// Toggle between showing and hiding the sidebar, and add overlay effect
+function open_sidebar() {
+  if (mySidebar.style.display === 'block') {
+    mySidebar.style.display = 'none';
+    overlayBg.style.display = "none";
+  } else {
+    mySidebar.style.display = 'block';
+    overlayBg.style.display = "block";
+  }
+}
+
+// Close the sidebar with the close button
+function close_sidebar() {
+  mySidebar.style.display = "none";
+  overlayBg.style.display = "none";
+}
+
+
+// Info
+function info(br) {
+  var m = "infoModal" + br;
+  var modal = document.getElementById(m);
+  modal.style.display = "block";
+}
+
+function closeInfo(br) {
+  var c = close + "br";
+  var span = document.getElementById(c);
+  var m = "infoModal" + br;
+  var modal = document.getElementById(m);
+  modal.style.display = "none";
+}
+
+
+// Prijava
+function prijava(br) {
+  var m = "prijavaModal" + br;
+  var modal = document.getElementById(m);
+  modal.style.display = "block";
+}
+
+function closePrijava(br) {
+  var c = close + "br";
+  var span = document.getElementById(c);
+  var m = "prijavaModal" + br;
+  var modal = document.getElementById(m);
+  modal.style.display = "none";
+}
+
+// Update
+function update(br) {
+  var m = "updateModal" + br;
+  var modal = document.getElementById(m);
+  modal.style.display = "block";
+}
+
+function closeUpdate(br) {
+  var c = close + "br";
+  var span = document.getElementById(c);
+  var m = "updateModal" + br;
+  var modal = document.getElementById(m);
+  modal.style.display = "none";
+}
+
+</script>
+
+</body>
+</html>

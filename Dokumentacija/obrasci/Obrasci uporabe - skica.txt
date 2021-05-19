@@ -1,0 +1,411 @@
+UC1 - Registracija u sustav
+Glavni sudionik: Neregistrirani korisnik
+Cilj: Stvaranje korisničkog računa za pristup sustavu
+Sudionici: Baza podataka
+Preduvjet: -
+Opis osnovnog tijeka:
+	1. Korisnik odabire opciju za registraciju u sustav
+	2. Korisnik unosi svoje podatke
+	3. Korisniku se pridjeljuje njegova identifikacija tipa ID_xxxxx
+	4. Generira se lozinka koja se šalje korisniku
+	5. Sustav šalje korisniku poveznicu za potvrdu registracije
+Opis mogućih odstupanja:
+	2.a Odabir već zauzetog korisničkog imena i/ili e-maila, unos korisničkih podataka u nedozvoljenom formatu ili pružanje neispravnog e-maila
+		1. Sustav obavještava korisnika o neuspjelom upisu i vraća ga na stranicu za registraciju
+		2. Korisnik mijenja potrebne podatke te završava unos ili odustaje od registracije
+		
+UC1.1 - Potvrdi registraciju
+Glavni sudionik: Neregistrirani korisnik
+Cilj: Potrvrditi svoju registraciju u sustav
+Sudionici: Baza podataka
+Preduvjet: Ispunjen obrazac za registraciju
+Opis osnovnog tijeka:
+	1. Korisnik e-mailom prima poveznicu za potvrdu registracije
+	2. Korisnik klikom na poveznicu potvrđuje stvaranje korisničkog računa
+	3. Korisnikovi podatci se pohranjuju u bazu podataka
+Opis mogućih odstupanja:
+	2.a Korisnik ne potvrđuje svoju prijavu klikom na dobivenu poveznicu
+		1. Registracija se ne potvrđuje
+		
+UC2 - Pregled konferencija
+Glavni sudionik: Prijavljeni korisnik
+Cilj: Pregled svih konferencija
+Sudionici: Baza podataka
+Preduvjet: Korisnik je prijavljen
+Opis osnovnog tijeka:
+	1. Korisnik odabire opciju "Pregledaj konferencije"
+	2. Korisniku se prikazuju sve postojeće konferencije
+	3. Korisnik odabere jednu od konferencija
+	4. Prikazuju se informacije o konferenciji
+
+UC3 - Prijava u sustav
+Glavni sudionik: Prijavljeni korisnik
+Cilj: Dobiti pristup korisničkom sučelju
+Sudionici: Baza podataka
+Preduvjet: Sudionik je registriran
+Opis osnovnog tijeka:
+	1. Korisnik izabire opciju "Prijava"
+	2. Unos e-maila i lozinke
+	3. Potvrda o ispravnosti unesenih podataka
+	4. Pristup korisničkim funkcijama
+Opis mogućih odstupanja:
+	3.a Neispravno korisničko ime ili lozinka
+		1. Sustav obaviještava korisnika o neuspjeloj prijavi i vraća ga na stranicu prijavu
+
+UC3.1 - Generiranje nove lozinke
+Glavni sudionik: Prijavljeni korisnik
+Cilj: Dobiti novu lozinku na e-mail
+Sudionici: Baza podataka
+Preduvjet: Sudionik je registriran
+Opis osnovnog tijeka:
+	1. Korisnik odabire opciju "Zaboravljena lozinka"
+	2. Korisnik u polje unosi svoju e-mail adresu
+	3. Korisnik odabire gumb "Pošalji novu lozinku"
+	4. Korisniku na e-mail dolazi nova lozinka za njegov račun
+Opis mogućih odstupanja:
+	2.a Neispravno unesena e-mail adresa
+		1. Sustav obavještava korisnika da provjeri unesenu adresu
+	
+UC4 - Pijava za sudjelovanje na konferenciji
+Glavni sudionik: Prijavljeni korisnik
+Cilj: Izabrati željenu konferenciju
+Sudionici: Baza podataka
+Preduvjet: Korisnik je prijavljen
+Opis osnovnog tijeka:
+	1. Korisnik bira opciju "Prijava za sudjelovanje"
+	2. Korisniku se prikazuje lista svih postojećih konferencija
+	3. Korisnik odabire konferenciju
+	4. Korisniku se prikazuju informacije o konferenciji i popis sekcija
+	5. Korisnik izabire opciju "Prijavi se"
+	6. Korisniku se otvara obrazac za prijavu kojeg popunjava
+	7. Korisnik potvrđuje prijavu
+
+UC4.1 - Odabir sekcije
+Glavni sudionik: Prijavljeni korisnik
+Cilj: Izabrati željenu sekciju unutar konferencije
+Sudionici: Baza podataka
+Preduvjet: Korisnik je prijavljen, nije prošao datum za prijavu
+Opis osnovnog tijeka:
+	1. Korisniku je prikazana lista sekcija koje može odabrati
+	2. Korisnik odabire željenu sekciju
+	
+UC4.2 - Slanje potvrde o uspješnoj prijavi
+Glavni sudionici: Prijavljeni korisnik
+Cilj: Dobiti odobrenje za sudjelovanje na konferenciji
+Opis osnovnog tijeka:
+	1. Korisnik na e-mail dobiva potvrdu za sudjelovanje u sekciji
+	2. Korisniku se određuje vrijeme do kada smije učitati svoj rad
+
+UC4.3 - Učitavanje rada
+Glavni sudionik: Prijavljeni korisnik
+Cilj: Učitati svoj rad
+Sudionici: Baza podataka
+Preduvjet: Korisnik je prijavljen u sustav; odobrena mu je prijava u sekciju; nije prošlo vrijeme za učitavanje rada
+Opis osnovnog tijeka:
+	1. Korisnik odabire opciju "Učitaj svoj rad"
+	2. Korisniku se otvara polje u koje može učitati rad
+	3. Korisnik može stisnuti gumb "Pošalji" za slanje rada
+	4. Sustav korisniku šalje obavijest o primitku rada
+Opis mogućih odstupanja:
+	2.a Korisnik je učitao datoteku koja nije u pdf formatu
+		1. Korisniku se javlja da je učitao datoteku pogrešnog formata
+	3.a Korisnik nije stisnuo gumb za slanje rada
+		1. Sustav javlja korisniku da nije poslao učitani rad
+
+UC5 - Pregled osobnih podataka
+Glavni sudionik: Prijavljeni korisnik
+Cilj: Pregledati osobne podatke
+Sudionici: Baza podataka
+Preduvjet: Korisnik je prijavljen
+Opis osnovnog tijeka:
+	1. Korisnik odabire opciju za pregled osobnih podataka
+	2. Sustav prikazuje osobne podatke korisnika
+
+UC6 - Uređivanje osobnih podataka
+Glavni sudionik: Prijavljeni korisnik
+Cilj: Urediti osobne podatke
+Sudionici: Baza podataka
+Preduvjet: Korisnik je prijavljen
+Opis osnovnog tijeka:
+	1. Korisnik odabire opciju za promjenu osobnih podataka
+	2. Korisnik mijenja svoje podatke
+	3. Korisnik sprema promjene
+	4. Baza podataka se ažurira
+Opis mogućih odstupanja:
+	2.a Korisnik promijeni osobne podatke, ali ne odabire opciju "Spremi promjene"
+		1. Sustav obaviještava korisnika da nije spremio podatke prije izlaska iz prozora
+
+UC7 - Brisanje korisničkog računa
+Glavni sudionik: Prijavljeni korisnik
+Cilj: Izbrisati svoj korisnički račun
+Sudionici: Baza podataka
+Preduvjet: Korisnik je prijavljen
+Opis osnovnog tijeka:
+	1. Korisnik pregledava osobne podatke
+	2. Otvara se stranica s osobnim podatcima
+	3. Korisnik bira opciju za brisanje računa
+	4. Korisnički račun se briše iz baze podataka
+	5. Otvara se stranica za registraciju
+	
+UC8 - Prijava za recenziranje
+Glavni sudionik: Prijavljeni korisnik
+Cilj: Prijava korisnika za recenziranje
+Sudionici: Baza podataka, organizator konferencije
+Opis osnovnog tijeka:
+	1. Korisnik izabire opciju "Prijavi se za recenziranje"
+	2. Korisniku se otvara obrazac za prijavu
+	3. Korisnik ispunjava obrazac za prijavu i potvrđuje ga
+	4. Nakon potvrde organizatora korisnik dobiva ovlasti recenzenta
+Opis mogućih odstupanja:
+	4.a Organizator konferencije odbija prijavu za recenziranje
+		1. Korisnik dobiva obavijest o neuspješnoj prijavi
+		
+UC9 - Uredi učitani rad
+Glavni sudionik: Prijavljeni korisnik
+Cilj: Urediti učtitani rada
+Sudionici: Baza podataka
+Opis osnovnog tijeka:
+	1. Korisnik odabire opciju "Uredi rad"
+	2. Sustav prikazuje sve do tada predane radove
+	3. Korisnik odabire rad koji želi urediti
+	4. Korisnik uređuje rad
+	5. Korisnik pohranjue promjene
+	6. Promjena se sprema u bazu podataka
+Opis mogućih odstupanja:
+	2.a Korisnik nema učitanih radova
+		1. Sustav ispisuje poruku "Nema učitanih radova"
+	4.a Korisnik promijeni rad, ali ne odabire opciju "Spremi promjene"
+		1. Sustav obaviještava korisnika da nije spremio promjene prije izlaska iz prozora
+
+
+
+
+UC10 - Pregledaj radove
+Glavni sudionik: Recenzent
+Cilj: Pregledati popis svih radova
+Sudionici: Baza podataka
+Preduvjet: Recenzent prijavljen
+Opis osnovnog tijeka:
+	1. Recenzent bira opciju "Pregledaj radove"
+	2. Recenzentu se otvara popis svih učitanih radova
+Opis mogućih odstupanja:
+	2.a Još nema učitanih radova
+		1. Sustav ispisuje poruku "Nema radova"
+
+UC11 - Odbij rad
+Glavni sudionik: Recenzent
+Cilj: Odbijanje rada
+Sudionici: Baza podataka
+Preduvjet: Recenzent prijavljen, sudionik konferencije je učitao svoj rad
+Opis osnovnog tijeka:
+	1. Recenzent bira opciju "Recenziraj rad"
+	2. Recenzent bira ocjenu "Rad odbijen"
+	3. Recenzent unosi primjedbe u odgovarajuće polje
+	4. Recenzent potvrđuje svoj odabir
+	5. Sustav obaviještava korisnika o odluci recenzenta
+
+UC12 - Prihvati rad
+Glavni sudionik: Recenzent
+Cilj: Prihvatiti rad bez izmjena
+Sudionici: Baza podataka
+Preduvjet: Recenzent prijavljen, sudionik konferencije je učitao svoj rad
+Opis osnovnog tijeka:
+	1. Recenzent bira opciju "Recenziraj rad"
+	2. Recenzent bira ocjenu "Rad prihvaćen"
+	3. Recenzent potvrđuje svoj odabir
+	4. Sustav obaviještava korisnika o odluci recenzenta
+	
+UC13 - Prihvati rad uz promjene
+Glavni sudionik: Recenzent
+Cilj: Prihvatiti rad uz uvjet da ga autor izmjeni
+Sudionici: Baza podataka
+Preduvjet: Recenzent prijavljen, sudionik konferencije je učitao svoj rad
+Opis osnovnog tijeka:
+	1. Recenzent bira opciju "Recenziraj rad"
+	2. Recenzent bira ocjenu "Rad prihvaćen uz izmjene"
+	3. Recenzent unosi primjedbe u odgovarajuće polje
+	4. Recenzent potvrđuje svoj odabir
+	5. Sustav obaviještava korisnika o odluci recenzenta
+
+UC14 - Preuzmi rad lokalno
+Glavni sudionik: Recenzent
+Cilj: Preuzeti rad na svoje računalo
+Sudionici: Baza podataka
+Preduvjet: Recenzent prijavljen, sudionik konferencije je učitao svoj rad
+Opis osnovnog tijeka:
+	1. Recenzent bira opciju "Preuzmi rad na računalo"
+	2. Na računalo recenzenta se sprema rad u pdf formatu
+
+UC15 - Pregledaj rad online
+Glavni sudionik: Recenzent
+Cilj: Pregledati rad online
+Sudionici: Baza podataka
+Preduvjet: Recenzent prijavljen, sudionik konferencije je učitao svoj rad
+Opis osnovnog tijeka:
+	1. Recenzent bira opciju "Pregledaj rad online"
+	2. Sustav se prikazuje u novoj kartici preglednika
+
+
+
+
+
+
+
+	
+UC16 - Odobri prijavu za recenziranje
+Glavni sudionik: Organizator konferencije
+Cilj: Odobriti zahtjev za recenziranje radova
+Sudionici: Baza podataka
+Preduvjet: Organizator je prijavljen
+Opis osnovnog tijeka:
+	1. Organizator konferencije odabire opciju "Zahtjevi za recenziranje"
+	2. Sustav prikazuje popis primljenih zahtjeva za recenziranje
+	3. Organizator konferencije odobrava ili odbacuje zahtjev
+	4. Prijavljenog se obavještava o učinjenom
+Opis mogućih odstupanja:
+	2.a Nema primljenih zahtjeva
+		1. Sustav ispisuje poruku "Nema pristiglih zahtjeva"
+
+UC17 - Slanje obavijesti sudionicima
+Glavni sudionik: Organizator konferencije
+Cilj: Slanje obavijesti sudionicima
+Sudionici: Baza podataka
+Preduvjet: Organizator je prijavljen
+Opis osnovnog tijeka:
+	1. Organizator konferencije bira opciju "Pošalji obavijest sudionicima"
+	2. Organizator konferencije upisuje obavijest u odgovarajuće polje
+	3. Organizator odabire konferenciju među ponuđenima
+	4. Sustav prikazuje popis svih sudionika za odabranu konferenciju
+	5. Organizator konferencije bira opciju "Pošalji svima" ili odabire željene sudionike
+	6. Potvrdom obavijesti ona se šalje sudionicima na e-mail
+Opis mogućih odstupanja:
+	4.a Na odabranoj konferenciji nema sudionika
+		1. Sustav ispisuje poruku "Nema sudionika"
+	6.a Organizator sastavlja obavijest, ali napušta prozor bez potvrde slanja
+		1. Sustav obaviještava organizatora da slanje obavijesti nije potvrđeno
+
+UC18 - Preuzmi rad sudionika
+Glavni sudionik: Organizator konferencije
+Cilj: Preuzeti rad sudionika
+Sudionici: Baza podataka
+Preduvjet: Organizator je prijavljen
+Opis osnovnog tijeka:
+	1. Organizator konferencije izabire opciju "Preuzmi rad sudionika"
+	2. Prikazuje se popis svih radova po sekcijama
+	3. Organizator odabire radove koje želi preuzeti
+	4. Organizator potvrđuje odabir i redovi se preuzimaju
+Opis mogućih odstupanja:
+	2.a  Nema učitanih radova na konfereniciji
+		1. Sustav ispisuje poruku "Nema radova"
+
+UC19 - Pregled statistike o radovima
+Glavni sudionik: Organizator konferencije
+Cilj: Pregledati broj radova ukupno i po sekcijama
+Sudionici: Baza podataka
+Preduvjet: Organizator je prijavljen
+Opis osnovnog tijeka:
+	1. Organizator odabire opciju "Pregledaj sve radove"
+	2. Prikazuje se popis svih radova po sekcijama
+	3. Organizator odabire opciju "Prikaži statistiku"
+	4. Prikazuje se statistika za odabranu konferenciju
+	
+UC20 - Pregled podataka korisnika
+Glavni sudionik: Administrator
+Cilj: Pregledati podatke korisnika
+Sudionici: Baza podataka
+Preduvjet: Admin je prijavljen
+Opis osnovnog tijeka:
+	1. Administrator konferencije bira opciju "Pregledaj podatke korisnika"
+	2. Administrator konferencije pronalazi željenog sudionika
+	3. Podatci korisnika se prikazuju
+Opis mogućih odstupanja:
+	1.a  Nema registriranih korisnika
+		1. Sustav ispisuje poruku "Nema registriranih korisnika"
+
+UC21 - Mijenjanje podataka sudionika
+Glavni sudionik: Administrator
+Cilj: Promijeniti podatke sudioniku
+Sudionici: Baza podataka
+Preduvjet: Organizator je prijavljen
+Opis osnovnog tijeka:
+	1. Administrator bira opciju "Pregledaj podatke sudioniku"
+	2. Administrator pronalazi željenog sudionika
+	3. Podatci korisnika se prikazuju
+	3. Administrator bira opciju "Promijeni podatke"
+	4. Administrator mijenja podatke sudioniku
+	5. Administrator sprema promjene
+	6. Baza podataka se ažurira
+Opis mogućih odstupanja:
+	1.a  Nema registriranih korisnika
+		1. Sustav ispisuje poruku "Nema registriranih korisnika"
+	5.a Organizator mijenja podatke, ali ne odabire opciju "Spremi promjene"
+		1. Sustav obavještava organizatora da nije spremio podatke
+
+UC22 - Dodavanje podataka sudioniku
+Glavni sudionik: Administrator
+Cilj: Dodati podatke sudioniku
+Sudionici: Baza podataka
+Preduvjet: Organizator je prijavljen
+Opis osnovnog tijeka:
+	1. Administrator bira opciju "Pregledaj podatke sudioniku"
+	2. Administrator pronalazi željenog sudionika
+	3. Podatci korisnika se prikazuju
+	3. Administrator bira opciju "Dodaj podatke"
+	4. Administrator dodaje podatke sudioniku
+	5. Administrator sprema promjene
+	6. Baza podataka se ažurira
+Opis mogućih odstupanja:
+	1.a  Nema registriranih korisnika
+		1. Sustav ispisuje poruku "Nema registriranih korisnika"
+	5.a Organizator doda podatke, ali ne odabire opciju "Spremi promjene"
+		1. Sustav obavještava organizatora da nije spremio podatke
+
+UC23 - Pregled aktivnih korisnika
+Glavni sudionik: Administrator
+Cilj: Pregled statistike
+Sudionici: Baza podataka
+Preduvjet: Administrator je prijavljen
+Opis osnovnog tijeka:
+	1. Administrator odabire opciju "Popis aktivnih korisnika"
+	2. Prikazuje se popis i broj korisnika koji su trenutno aktivni
+		
+UC24 - Stvaranje nove konferencije
+Glavni sudionik: Administrator
+Cilj: Stvroti novu konferenciju
+Sudionici: Baza podataka
+Preduvjet: Administrator je prijavljen
+Opis osnovnog tijeka:
+	1. Administrator odabire opciju "Stvoriti novu konferenciju"
+	2. Prikazuje se prozor za unos opcija
+	3. Administrator popunjava opcije
+	4. Administrator potvrđuje unesene podatke
+Opis mogućih odstupanja:
+	4.a organizator doda podatke, ali ne odabire opciju "Spremi promjene"
+		1. Sustav obavještava organizatora da nije spremio podatke
+
+UC24.1 - Upisivanje podataka o konferenciji
+Glavni sudionik: Administrator
+Cilj: Upisati podatke za novu konferenciju
+Sudionici: Baza podataka
+Preduvjet: Administrator je prijavljen
+Opis osnovnog tijeka:
+	1. Administrator odabire opciju za unos podataka o konferenciji
+	2. Administrator unosi sve potrebne podatke o konferenciji
+
+UC24.2 - Odredi organizatora konferencije
+Glavni sudionik: Administrator
+Cilj: Odabrati organizatora konferencije
+Sudionici: Baza podataka
+Preduvjet: Administrator je prijavljen
+Opis osnovnog tijeka:
+	1. Administrator odabire opciju za dodavanje organizatora
+	2. Administrator u sustavu odabire organizatora konferencije
+
+UC24.3 - Definiranje upitnika za prijavu
+Glavni sudionik: Administrator
+Cilj: Definirati upitnik za prijavu na konferenciju
+Sudionici: Baza podataka
+Preduvjet: Administrator je prijavljen
+Opis osnovnog tijeka:
+	1. Administrator odabire opciju za definiranje upitnika za prijavu
+	2. Administrator definira upitnik na temelju zahtjeva organizatora

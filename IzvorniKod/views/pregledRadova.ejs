@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%=title%></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="fonts/fonts.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="fontawesome2/css/all.min.css" rel="stylesheet" /> <!-- https://fontawesome.com/ -->
+  <style>
+    html,body,h1,h2,h3,h4,h5,p {font-family: "Raleway", sans-serif}
+    .obavijest {color: green; padding-top: 5px; margin-bottom: -10px;}
+    .sudionik {margin-top: 15px}
+    .submitBtn {margin-bottom: 30px;}
+  </style>
+</head>
+
+<body class="light-grey">
+
+<!-- Top container -->
+<div class="bar top black large" style="z-index:4">
+  <button class="bar-item button hide-large hover-none hover-text-light-grey" onclick="open_sidebar();"><i class="fa fa-bars"></i>  Menu</button>
+  <span class="bar-item right"><i class="fas fa-globe"></i>&nbsp Sci-Con</span>
+</div>
+
+<!-- Sidebar/menu -->
+<nav class="sidebar collapse white animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+  <div class="container row">
+    <div class="col s4">
+      <img src="images/male.jpg" class="circle margin-right" style="width:46px">
+    </div>
+    <div class="col s8 bar">
+      <span>Dobrodošli, <strong><%=user.ime%></strong></span><br>
+      
+      <% if (user.organizator) { %> 
+        <a href="/slanje-obavijesti" class="bar-item button"><i class="fa fa-envelope"></i></a>
+      <% } %>
+
+      <a href="/profil" class="bar-item button"><i class="fa fa-user"></i></a>
+      <a href="/postavke" class="bar-item button"><i class="fa fa-cog"></i></a>
+      <a href="/odjava" class="bar-item button"><i class="fa fa-sign-out-alt"></i></a>
+    </div>
+  </div>
+  <hr>
+  <div class="container">
+    <h5>Radna površina</h5>
+  </div>
+  <div class="bar-block">
+    <a href="#" class="bar-item button padding-16 hide-large dark-grey hover-black" onclick="close_sidebar()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
+    <a href="/profil" class="bar-item button padding"><i class="fas fa-user fa-fw"></i>  Profil</a>
+    <a href="/popis-konferencija" class="bar-item button padding"><i class="fa fa-list fa-fw"></i>  Popis konferencija</a>
+    <a href="/ucitavanje-rada" class="bar-item button padding"><i class="fa fa-edit fa-fw"></i>  Učitavanje rada</a>
+    <a href="/moji-radovi" class="bar-item button padding"><i class="fa fa-history fa-fw"></i>  Moji radovi</a>
+    
+    <% if(user.recenzent) { %>
+      <a href="/recenzija-rada" class="bar-item button padding"><i class="fas fa-eye fa-fw"></i>  Recenzija rada</a>
+      <% } %>
+    
+      <% if(user.organizator) { %>
+      <a href="/prijave-za-recenziranje" class="bar-item button padding"><i class="fa fa-bell fa-fw"></i>  Prijave za recenziranje</a>
+      <a href="/slanje-obavijesti" class="bar-item button padding"><i class="fas fa-envelope fa-fw"></i>  Slanje obavijesti</a>
+      <a href="/pregled-radova" class="bar-item button padding blue"><i class="fas fa-book fa-fw"></i>  Pregled radova</a>
+      <% } %>
+
+      <% if(user.administrator) { %>
+      <a href="/stvori-konferenciju" class="bar-item button padding"><i class="far fa-plus-square fa-fw"></i>  Stvori konferenciju</a>
+      <a href="/statistika" class="bar-item button padding"><i class="fa fa-chart-bar fa-fw"></i>  Statistika</a>
+      <% }%>
+    <a href="/postavke" class="bar-item button padding"><i class="fa fa-cog fa-fw"></i>  Postavke</a>
+    <a href="/odjava" class="bar-item button padding"><i class="fa fa-sign-out-alt fa-fw"></i>  Odjava</a><br><br>
+  </div>
+</nav>
+
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="overlay hide-large animate-opacity" onclick="close_sidebar()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="main1">
+
+        <h1>Prihvaćeni radovi:</h1>
+          <form action="/slanje-obavijesti" method="POST"><br>
+              <h4>Popis radova po konferencijama: </h4>
+              <br>
+              <div style="margin-left:30px">
+                  <% sekcije.forEach(s => { %>
+                    <h5>Konferencija: <%= s.konferencija%>, sekcija: <%= s.sekcija %></h5>
+
+                    <% let br = 0 %>
+                    <% s.radovi.forEach(rad => { %>
+                        <% let name = 'sudionik' + br %>
+                        <div class="sudionik">
+                          <label for="sudionik1"><%= rad.naslov %></label>
+                          <button class="green" id="dohvatiBtn"> <a style="text-decoration: none;" href="/pregled-radova/<%=rad.id_rada%>">Preuzmi rad</a></button>
+                        </div>
+                      <% br++ %>
+                    <% }) %>
+                  <% }) %>
+                </div>
+          </form>
+
+
+
+  
+</div>
+
+<script>
+// Get the Sidebar
+var mySidebar = document.getElementById("mySidebar");
+
+// Get the DIV with overlay effect
+var overlayBg = document.getElementById("myOverlay");
+
+// Toggle between showing and hiding the sidebar, and add overlay effect
+function open_sidebar() {
+  if (mySidebar.style.display === 'block') {
+    mySidebar.style.display = 'none';
+    overlayBg.style.display = "none";
+  } else {
+    mySidebar.style.display = 'block';
+    overlayBg.style.display = "block";
+  }
+}
+
+// Close the sidebar with the close button
+function close_sidebar() {
+  mySidebar.style.display = "none";
+  overlayBg.style.display = "none";
+}
+
+// Select all
+document.getElementById('select-all').onclick = function() {
+  var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  for (var checkbox of checkboxes) {
+    checkbox.checked = this.checked;
+  }
+}
+
+</script>
+
+</body>
+</html>

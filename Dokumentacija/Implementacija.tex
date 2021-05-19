@@ -1,0 +1,339 @@
+\chapter{Implementacija i korisničko sučelje}
+		
+		
+		\section{Korištene tehnologije i alati}
+			Komunikacija u timu realizirana je korištenjem aplikacija Whatsapp i Discord. Za izradu UML dijagrama korišten je alat Astah Professional, a kao sustav za upravljanje izvornim kodom Git. Udaljeni repozitorij projekta je dostupan na web platformi GitLab.\par
+			
+			Kao razvojno okruženje korišten je Visual Studio Code - integrirano razvojno okruženje (IDE) tvrtke Microsoft.\par
+			
+			Udaljeni repozitorij projekta je dostupan na web platformi GitLab.\par
+			
+			Aplikacija je napisana koristeći Node.js-a za izradu \textit{backenda} te Embedded Javascript za izradu \textit{frontenda}.\par 
+			
+			Baza podataka je izrađena u PostgreSQL-u.\par
+			
+			
+			\eject 
+		
+	
+		\section{Ispitivanje programskog rješenja}
+			
+			\subsection{Ispitivanje komponenti}
+			\textit{Potrebno je provesti ispitivanje jedinica (engl. unit testing) nad razredima koji implementiraju temeljne funkcionalnosti. Razraditi \textbf{minimalno 6 ispitnih slučajeva} u kojima će se ispitati redovni slučajevi, rubni uvjeti te izazivanje pogreške (engl. exception throwing). Poželjno je stvoriti i ispitni slučaj koji koristi funkcionalnosti koje nisu implementirane. Potrebno je priložiti izvorni kôd svih ispitnih slučajeva te prikaz rezultata izvođenja ispita u razvojnom okruženju (prolaz/pad ispita). }
+			
+			
+			
+			\subsection{Ispitivanje sustava}
+			
+			 Testirali smo dva segmenta aplikacije: registraciju korisnika i prijavu korisnika
+			 		
+			 	\subsubsection{Registracija korisnika}	
+			 		\textbf{Slučaj 1}\\
+			 		Opis ispitnog slučaja:
+			 		\begin{itemize}
+			 			\item Radimo registraciju korisnika. Svi ulazni podaci su ispravni osim unesene e-mail adrese koja je već korištena za prijavu jednog od korisnika
+			 		\end{itemize}
+		 			Očekivani rezultat:
+		 			\begin{itemize}
+		 				\setlength\itemsep{0.1em}
+		 				\item Neuspješna registracija
+		 				\item Ispis "E-mail koji ste odabrali se već koristi."
+		 			\end{itemize}
+	 				\begin{figure}[H]
+	 					\includegraphics[width=0.8\linewidth]{slike/"registracija korisnika FAIL - selenium"}
+	 					\centering
+	 					\caption{Registracija korisnika FAIL - selenium}
+	 					\label{registracija korisnika FAIL - selenium}
+	 				\end{figure}
+ 					Dobiveni rezultat:
+ 					\begin{itemize}
+ 						\setlength\itemsep{0.1em}
+ 						\item Neuspješna prijava
+ 						\item Ispis primjerene poruke
+ 					\end{itemize}
+ 					\begin{figure}[H]
+ 						\includegraphics[width=0.5\linewidth]{slike/"neuspjesna registracija"}
+ 						\centering
+ 						\caption{Neuspješna registracija - e-mail se već koristi}
+ 						\label{neuspjesna registracija - e-mail se vec koristi}
+ 					\end{figure}
+ 					
+ 					\textbf{Slučaj 2}\\
+ 					Opis ispitnog slučaja:
+ 					\begin{itemize}
+ 						\item Radimo registraciju korisnika. Svi podaci su ispravno uneseni
+ 					\end{itemize}
+ 					Očekivani rezultat:
+ 					\begin{itemize}
+ 						\setlength\itemsep{0.1em}
+ 						\item Uspješna registracija
+ 						\item Ispis "Na vašu e-mail adresu dostavljena je lozinka i aktivacijski link. Molimo prvo potvrdite svoju registraciju."
+ 					\end{itemize}
+ 					\begin{figure}[H]
+ 						\includegraphics[width=1\linewidth]{slike/"registracija korisnika OK - selenium"}
+ 						\centering
+ 						\caption{Registracija korisnika OK - selenium}
+ 						\label{registracija korisnika OK - selenium}
+ 					\end{figure}
+ 					Dobiveni rezultat:
+ 					\begin{itemize}
+ 						\setlength\itemsep{0.1em}
+ 						\item Uspješna registracija
+ 						\item Ispis poruke
+ 					\end{itemize}
+ 					\begin{figure}[H]
+ 						\includegraphics[width=0.5\linewidth]{slike/"uspjesna registracija"}
+ 						\centering
+ 						\caption{Uspješna registracija - poruka}
+ 						\label{uspjesna registracija}
+ 					\end{figure}
+		 		\eject
+		 		
+		 		\subsubsection{Prijava korisnika}
+		 			\textbf{Slučaj 1}\\
+		 			Opis ispitnog slučaja:
+		 			\begin{itemize}
+		 				\item Korisnik se prijavljuje u sustav
+		 			\end{itemize}
+	 				Očekivani rezultat:
+	 				\begin{itemize}
+	 					\item Uspješna prijava u sustav
+	 				\end{itemize}
+ 					\begin{figure}[H]
+ 						\includegraphics[width=1\linewidth]{slike/"prijavaKorisnika_OK-selenium"}
+ 						\centering
+ 						\caption{Prijava korisnika OK -selenium}
+ 						\label{uspjesna prijava - selenium}
+ 					\end{figure}
+ 					Dobiveni rezultat:
+ 					\begin{itemize}
+ 						\item Korisnik se uspješno prijavio u sustav
+ 					\end{itemize}
+ 					\begin{figure}[H]
+ 						\includegraphics[width=0.9\linewidth]{slike/"uspjesnaPrijava-prikazProfila"}
+ 						\centering
+ 						\caption{Uspješna prijava}
+ 						\label{uspjesna prijava}
+ 					\end{figure}
+ 				
+ 					\textbf{Slučaj 2}\\
+ 					Opis ispitnog slučaja:
+ 					\begin{itemize}
+ 						\item Pokušaj prijave korisnika u sustav s nepotvrđenim računom
+ 					\end{itemize}
+ 					Očekivani rezultati:
+ 					\begin{itemize}
+ 						\setlength\itemsep{0.1em}
+ 						\item Neuspješna prijava
+ 						\item Ispis "Vaša registracija nije potvrđena. Potvrdite e-mail"
+ 					\end{itemize}
+ 					\begin{figure}[H]
+ 						\includegraphics[width=1\linewidth]{slike/"prijavaKorisnika_FAIL-selenium"}
+ 						\centering
+ 						\caption{Prijava korisnika FAIL - selenium}
+ 						\label{neuspjesna prijava - selenium}
+ 					\end{figure}
+ 					Dobiveni rezultati:
+ 					\begin{itemize}
+ 						\setlength\itemsep{0.1em}
+ 						\item Neuspješna prijava
+ 						\item prikaz poruke
+ 					\end{itemize}
+ 					\begin{figure}[H]
+ 						\includegraphics[width=0.5\linewidth]{slike/"neuspjesnaPrijava"}
+ 						\centering
+ 						\caption{Neuspješna prijava - nepotvrđena registracija}
+ 						\label{neuspjesna prijava}
+ 					\end{figure}
+			
+			\eject 
+			
+			
+			\textbf{Slučaj 2}\\
+			Opis ispitnog slučaja:
+			\begin{itemize}
+				\item Pokušaj prijave korisnika u sustav s nepotvrđenim računom
+			\end{itemize}
+			Očekivani rezultati:
+			\begin{itemize}
+				\setlength\itemsep{0.1em}
+				\item Neuspješna prijava
+				\item Ispis "Vaša registracija nije potvrđena. Potvrdite e-mail"
+			\end{itemize}
+			\begin{figure}[H]
+				\includegraphics[width=1\linewidth]{slike/"prijavaKorisnika_FAIL-selenium"}
+				\centering
+				\caption{Prijava korisnika FAIL - selenium}
+				\label{neuspjesna prijava - selenium}
+			\end{figure}
+			Dobiveni rezultati:
+			\begin{itemize}
+				\setlength\itemsep{0.1em}
+				\item Neuspješna prijava
+				\item prikaz poruke
+			\end{itemize}
+			\begin{figure}[H]
+				\includegraphics[width=0.5\linewidth]{slike/"neuspjesnaPrijava"}
+				\centering
+				\caption{Neuspješna prijava - nepotvrđena registracija}
+				\label{neuspjesna prijava}
+			\end{figure}
+			
+			\eject 
+			
+			
+			\subsubsection{Stvaranje konferencije}
+			\textbf{Slučaj 1}\\
+			Opis ispitnog slučaja:
+			\begin{itemize}
+				\item Administrator stvara novu konferenciju
+			\end{itemize}
+			Očekivani rezultat:
+			\begin{itemize}
+				\item Konferencija uspješno stvorena
+			\end{itemize}
+			\begin{itemize}
+				\item Ispis odgovarajuće poruke
+			\end{itemize}
+			\begin{figure}[H]
+				\includegraphics[width=1\linewidth]{slike/"selenium - stvaranje konf"}
+				\centering
+				\caption{Stvaranje konferencije OK - selenium}
+				\label{uspjesna prijava - selenium}
+			\end{figure}
+			Dobiveni rezultat:
+			\begin{itemize}
+				\item Konferencija uspješno stvorena
+			\end{itemize}
+			\begin{itemize}
+				\item Ispis poruke o uspjehu
+			\end{itemize}
+			\begin{figure}[H]
+				\includegraphics[width=0.9\linewidth]{slike/"stvaranje konf - uspjeh"}
+				\centering
+				\caption{Uspješna prijava}
+				\label{uspjesna prijava}
+			\end{figure}
+		
+		\subsubsection{Prijava za sudjelovanje na konferenciji}
+		\textbf{Slučaj 1}\\
+		Opis ispitnog slučaja:
+		\begin{itemize}
+			\item Korisnik među ponuđenim konferencijama odabire onu na kojoj želi sudjelovati. Preduvjet je da je do trenutka odabira željene konferencije barem jedna konferencija definirana (uključujući njenog organizatora i sekcije). Klikom na gumb 'Prijava za sudjelovanje' korisniku se otvara forma koju treba ispuniti, a koja uključuje popis imena svih sekcija odabrane konferencije i prostor za upis vlastitog imena i prezimena. Nakon popunjavanja navedenih podataka klikom na gumb prijava se šalje u sustav.
+		\end{itemize}
+		Očekivani rezultat:
+		\begin{itemize}
+			\item Prijava je uspješno zabilježena u sustavu i korisnik prima elektroničkom poštom potvrdu u kojoj su zabilježeni njegovi osobni podatci uz podatke koji opisuju odabranu konferenciju i rok pohranjivanja znanstvenog rada u sustav.
+		\end{itemize}
+		\begin{itemize}
+			\item Ispis poruke koja potvrđuje uspješnu prijavu u okviru koji odgovara konferenciji koja ja prethodno odabrana.
+		\end{itemize}
+		\begin{figure}[H]
+			\includegraphics[width=1\linewidth]{slike/"marko_test_1"}
+			\centering
+			\caption{Uspješna potvrda prijave - selenium}
+			\label{mala_labelica}
+		\end{figure}
+		Dobiveni rezultat:
+		\begin{itemize}
+			\item Prijava uspješno zabilježena u sustav
+		\end{itemize}
+		\begin{itemize}
+			\item Ispis poruke o uspjehu
+		\end{itemize}
+		\begin{figure}[H]
+			\includegraphics[width=0.9\linewidth]{slike/"marko_screen_1"}
+			\centering
+			\caption{Uspješna prijava}
+			\label{mala_labelica}
+		\end{figure}
+		
+		
+		\section{Dijagram razmještaja}
+			Dijagrami razmještaja opisuju topologiju sklopovlja i programsku potporu koja se koristi u implementaciji sustava u njegovom radnom okruženju.Na poslužiteljskom	računalu se nalaze web poslužitelj i poslužitelj baze podataka. Klijenti koriste web preglednik kako bi pristupili web aplikaciji. Sustav je baziran na arhitekturi ”klijent – poslužitelj”, a komunikacija između računala korisnika i poslužitelja odvija se preko HTTP veze.\\
+			\begin{figure}[H]
+				\includegraphics[width=1\linewidth]{slike/"Dijagram razmjestaja"}
+				\centering
+				\caption{Dijagram razmještaja}
+				\label{dijagram razmjestaja}
+			\end{figure}
+						
+			\eject 
+		
+		\section{Upute za puštanje u pogon}
+		
+			
+			 
+			
+			\definecolor{light-gray}{gray}{0.95}
+			\newcommand{\code}[1]{\colorbox{light-gray}{\texttt{#1}}}
+			 
+			 Web servis se može pustiti u pogon na bilo kojem poslužitelju. U ovoj uputi će se koristiti poslužitelj \textit{Heroku} s besplatnim planom.
+			 
+			 Posjetite \href{https://www.heroku.com/}{Heroku web stranicu} te napravite besplatni račun. Zatim potvrdite svoj račun i odaberite plan svog računa \href{https://devcenter.heroku.com/articles/account-verification}{ovdje}. Zatim instalirajte i dodajte u lokalnu varijablu \textit{PATH} Heroku CLI pomoću web stranice \href{https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up}{ovdje}. Nakon toga otvorite naredbeni redak u praznoj mapi gdje će te klonirati javni repozitorij. Izvršite naredbu:
+			 
+			 \code{git clone https://gitlab.com/andreism/grupa1.git}
+			 
+			 \noindent
+			 Zatim se pozicionirajte u novonastalu mapu pomoću:
+			 
+			 \code{cd grupa1}
+			 
+			 \noindent
+			 Zatim izvršite naredbu:
+			 
+			 \code{heroku create svoje-ime}
+			 
+			 \noindent
+			 umjesto "svoje-ime" stavite proizvoljno ime. Dalje izvršite naredbu:
+			 
+			 \code{git push heroku master}
+			 
+			 \noindent
+			 kako biste postavili server na poslužitelja. Još je preostalo podešavanje baze podataka. Za to posjetite svoj \href{https://dashboard.heroku.com/apps}{\textit{Heroku dashboard}} te kliknite na svoju aplikaciju koju ste prethodno napravili. Zatim kliknite na gumb \textit{More} 
+			 
+			 \begin{figure}[H]
+			 	\includegraphics[width=0.9\linewidth]{upute-slike/"more"}
+			 	\centering
+			 	\caption{Tipka \textit{More}}
+			 	\label{mala_labelica}
+			 \end{figure}
+			 
+			 te odaberite opciju \textit{Run console}. 
+			 
+			 \begin{figure}[H]
+			 	\includegraphics[width=0.9\linewidth]{upute-slike/"run-console"}
+			 	\centering
+			 	\caption{Tipka \textit{Run console}}
+			 	\label{mala_labelica}
+			 \end{figure}
+			 
+			 Upišite u polje \textit{bash} te kliknite gumb \textit{Run} 
+			 
+			 \begin{figure}[H]
+			 	\includegraphics[width=0.9\linewidth]{upute-slike/"bash-run"}
+			 	\centering
+			 	\caption{\textit{Bash run}}
+			 	\label{mala_labelica}
+			 \end{figure}
+			 
+			 pričekajte dok se ne pojave znakovi
+			 \code{\textasciitilde  \$} u konzoli. Kada se pojave znakovi \code{\textasciitilde  \$} u konzoli, izvršite komandu:
+			 
+			 \code{npm run seed}
+			 
+			 \noindent
+			 te pričekajte da se naredba izvrši do kraja. Nakon što je naredba gotova, možete zatvoriti konzolu. Web servis je sada spreman i dostupan. Web stranicu možete posjetiti pomoću \textit{Open app} gumba
+			 
+			 \begin{figure}[H]
+			 	\includegraphics[width=0.9\linewidth]{upute-slike/"open-app"}
+			 	\centering
+			 	\caption{tipka \textit{Open app}}
+			 	\label{mala_labelica}
+			 \end{figure}
+			 
+			 
+			 
+			
+			
+			\eject 

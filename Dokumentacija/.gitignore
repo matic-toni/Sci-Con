@@ -1,0 +1,7 @@
+/dokumentacija/*.aux
+/dokumentacija/*.lof
+/dokumentacija/*.log
+/dokumentacija/*.lot
+/dokumentacija/*.out
+/dokumentacija/*.synctex.gz
+/dokumentacija/*.toc
